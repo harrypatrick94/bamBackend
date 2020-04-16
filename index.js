@@ -119,9 +119,9 @@ app.get('/user', (req, res) => {
 
 app.post('/add', (req, res) => {
 
-  const {wineName, description, img} = req.body
-  console.log(req.body);
-  console.log(req.body.img);
+  const {wineName, description, img} = req.query
+  // console.log(req.body);
+  // console.log(req.body.img);
   if (!wineName || !description || !img) {
   return res.status(400).json({msg: "Please enter all fields"})
   }

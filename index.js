@@ -105,4 +105,15 @@ const userSchema = new mongoose.Schema({
 
 let User = mongoose.model('User', userSchema)
 
+app.get('/user', (req, res) => {
+
+  Wine.find({},(err, response) => {
+    if (err) {
+      return console.log(err);
+    }
+    console.log("responseeeeee: ", response);
+    res.json(response);
+  })
+})
+
 app.listen(PORT, () => { console.log(`started on ${PORT}`)})

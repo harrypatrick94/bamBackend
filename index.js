@@ -60,9 +60,9 @@ router.post('/send', (req, res, next) => {
   })
 })
 
-app.get('/', (req, res) => {
-  res.send('HEY!')
-})
+// app.get('/', (req, res) => {
+//   res.send('HEY!')
+// })
 
 app.get('/test', (req, res) => {
   res.send('hello world')

@@ -53,41 +53,41 @@ router.post('/send', (req, res, next) => {
     }
   })
 })
-
-mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true} )
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-const wineSchema = new mongoose.Schema({
-  wineName: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  img: {
-    data: Buffer,
-    type: String,
-    required: true
-  },
-
-})
-
-let Wine = mongoose.model('Wine', wineSchema)
-
-const userSchema = new mongoose.Schema({
-  userName: {
-    type: String,
-    required: true
-  },
-  password: {
-    type: String,
-    required: true
-  }
-})
-
-let User = mongoose.model('User', userSchema)
+// 
+// mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true} )
+// const db = mongoose.connection;
+// db.on('error', console.error.bind(console, 'connection error:'));
+// const wineSchema = new mongoose.Schema({
+//   wineName: {
+//     type: String,
+//     required: true
+//   },
+//   description: {
+//     type: String,
+//     required: true,
+//   },
+//   img: {
+//     data: Buffer,
+//     type: String,
+//     required: true
+//   },
+//
+// })
+//
+// let Wine = mongoose.model('Wine', wineSchema)
+//
+// const userSchema = new mongoose.Schema({
+//   userName: {
+//     type: String,
+//     required: true
+//   },
+//   password: {
+//     type: String,
+//     required: true
+//   }
+// })
+//
+// let User = mongoose.model('User', userSchema)
 
 const app = express()
 app.use(cors())

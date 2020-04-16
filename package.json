@@ -1,0 +1,22 @@
+{
+  "name": "bam-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harrypatrick94/bamBackend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harrypatrick94/bamBackend/issues"
+  },
+  "homepage": "https://github.com/harrypatrick94/bamBackend#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

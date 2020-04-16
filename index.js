@@ -1,5 +1,5 @@
 let express = require('express');
-const app = express()
+
 let router = express.Router();
 let nodemailer = require('nodemailer');
 let cors = require('cors');
@@ -10,10 +10,16 @@ let bodyParser = require('body-parser');
 const creds = require('./config/config.js');
 const PORT = 3000
 
+const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 app.use(express.json())
 app.use('/', router)
+
+app.get('/test', (req, res) => {
+  res.send('hello world')
+})
+
 
 let transport = {
     host: 'smtp.gmail.com', // Don’t forget to replace with the SMTP host of your provider
@@ -39,7 +45,7 @@ router.post('/send', (req, res, next) => {
   let name = req.body.name
   let email = req.body.email
   let message = req.body.message
-  let content = `name: ${name} \n email: ${email} \n message: ${message} `
+  let content = `name: ${name} \n email: ${email} \n message: ${message}`
 
   let mail = {
     from: name,
@@ -65,9 +71,6 @@ router.post('/send', (req, res, next) => {
 //   res.send('HEY!')
 // })
 
-app.get('/test', (req, res) => {
-  res.send('hello world')
-})
 
 
 app.listen(PORT, () => { console.log(`started on ${PORT}`)})

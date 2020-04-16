@@ -116,4 +116,31 @@ app.get('/user', (req, res) => {
   })
 })
 
+
+app.post('/add', (req, res) => {
+
+  const {wineName, description, img} = req.body
+  console.log(req.body);
+  console.log(req.body.img);
+  if (!wineName || !description || !img) {
+  return res.status(400).json({msg: "Please enter all fields"})
+  }
+  const newWine = new Wine({
+      wineName,
+      description,
+      img
+    })
+
+  newWine.save()
+  .then( wine => {
+    res.json({
+      wine: {
+        name: wine.wineName,
+        description: wine.description,
+        img: wine.img
+      }
+    })
+  })
+})
+
 app.listen(PORT, () => { console.log(`started on ${PORT}`)})

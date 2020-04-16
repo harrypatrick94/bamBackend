@@ -12,8 +12,8 @@ let transport = {
     host: 'smtp.gmail.com', // Don’t forget to replace with the SMTP host of your provider
     port: 587,
     auth: {
-    user: creds.user,
-    pass: creds.pass
+    user: 'bensonandthemooch@gmail.com',
+    pass: 'discojuice'
   }
 }
 
@@ -54,40 +54,40 @@ router.post('/send', (req, res, next) => {
   })
 })
 
-mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true} )
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-const wineSchema = new mongoose.Schema({
-  wineName: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  img: {
-    data: Buffer,
-    type: String,
-    required: true
-  },
-
-})
-
-let Wine = mongoose.model('Wine', wineSchema)
-
-const userSchema = new mongoose.Schema({
-  userName: {
-    type: String,
-    required: true
-  },
-  password: {
-    type: String,
-    required: true
-  }
-})
-
-let User = mongoose.model('User', userSchema)
+// mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true} )
+// const db = mongoose.connection;
+// db.on('error', console.error.bind(console, 'connection error:'));
+// const wineSchema = new mongoose.Schema({
+//   wineName: {
+//     type: String,
+//     required: true
+//   },
+//   description: {
+//     type: String,
+//     required: true,
+//   },
+//   img: {
+//     data: Buffer,
+//     type: String,
+//     required: true
+//   },
+//
+// })
+//
+// let Wine = mongoose.model('Wine', wineSchema)
+//
+// const userSchema = new mongoose.Schema({
+//   userName: {
+//     type: String,
+//     required: true
+//   },
+//   password: {
+//     type: String,
+//     required: true
+//   }
+// })
+//
+// let User = mongoose.model('User', userSchema)
 
 app.get('/', (req, res) => {
   res.send('HEY!')

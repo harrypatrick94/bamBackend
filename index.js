@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 let bodyParser = require('body-parser');
 const creds = require('./config/config.js');
-
+const PORT = 3002
 let transport = {
     host: 'smtp.gmail.com', // Don’t forget to replace with the SMTP host of your provider
     port: 587,
@@ -89,11 +89,9 @@ const userSchema = new mongoose.Schema({
 
 let User = mongoose.model('User', userSchema)
 
-app.get('/', (req, res) => {
-  res.send('HEY!')
-})
-
-app.get('/test', (req, res) => {
-  res.send('hello world')
-})
-app.listen(3000, () => console.log('Server running on port 3000'))
+const app = express()
+app.use(cors())
+app.use(bodyParser.json())
+app.use(express.json())
+app.use('/', router)
+app.listen(PORT, () => { console.log(`started on ${PORT}`)})

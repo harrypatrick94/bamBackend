@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 let bodyParser = require('body-parser');
 const creds = require('./config/config.js');
-const PORT = 3000
+const PORT = 3002
 const app = express()
 app.use(cors())
 app.use(bodyParser.json())

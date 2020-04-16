@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 let bodyParser = require('body-parser');
 const creds = require('./config/config.js');
-const PORT = 3002
+const PORT = 3000
 let transport = {
     host: 'smtp.gmail.com', // Don’t forget to replace with the SMTP host of your provider
     port: 587,
@@ -53,41 +53,49 @@ router.post('/send', (req, res, next) => {
     }
   })
 })
-// 
-// mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true} )
-// const db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'connection error:'));
-// const wineSchema = new mongoose.Schema({
-//   wineName: {
-//     type: String,
-//     required: true
-//   },
-//   description: {
-//     type: String,
-//     required: true,
-//   },
-//   img: {
-//     data: Buffer,
-//     type: String,
-//     required: true
-//   },
-//
-// })
-//
-// let Wine = mongoose.model('Wine', wineSchema)
-//
-// const userSchema = new mongoose.Schema({
-//   userName: {
-//     type: String,
-//     required: true
-//   },
-//   password: {
-//     type: String,
-//     required: true
-//   }
-// })
-//
-// let User = mongoose.model('User', userSchema)
+
+mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true} )
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+const wineSchema = new mongoose.Schema({
+  wineName: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  img: {
+    data: Buffer,
+    type: String,
+    required: true
+  },
+
+})
+
+let Wine = mongoose.model('Wine', wineSchema)
+
+const userSchema = new mongoose.Schema({
+  userName: {
+    type: String,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  }
+})
+
+let User = mongoose.model('User', userSchema)
+
+app.get('/', (req, res) => {
+  res.send('HEY!')
+})
+
+app.get('/test', (req, res) => {
+  res.send('hello world')
+})
 
 const app = express()
 app.use(cors())

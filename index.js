@@ -120,8 +120,8 @@ app.post('/add', (req, res) => {
         img: wine.img
       }
     })
-    res.send(wine)
   })
+  .then(res.send(`saved ${newWine}`))
 })
 
 // find all wines

@@ -98,14 +98,14 @@ let User = mongoose.model('User', userSchema)
 
 // find all wines
 app.get('/user', (req, res) => {
-  res.send('hello world')
-  // Wine.find({},(err, response) => {
-  //   if (err) {
-  //     return console.log(err);
-  //   }
-  //   console.log("responseeeeee: ", response);
-  //   res.json(response);
-  // })
+
+  Wine.find({},(err, response) => {
+    if (err) {
+      return console.log(err);
+    }
+    console.log("responseeeeee: ", response);
+    res.json(response);
+  })
 })
 
 app.get('/test', (req, res) => {

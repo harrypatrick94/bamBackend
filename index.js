@@ -131,10 +131,12 @@ app.get('/user', (req, res) => {
   Wine.find({},(err, response) => {
     if (err) {
       // return console.log(err);
-    return res.send(err)
-    }
-    res.send(response)
-    res.json(response);
+    return res.send('err')
+  } else {
+    return res.send('response')
+  }
+
+    // res.json(response);
   })
 })
 

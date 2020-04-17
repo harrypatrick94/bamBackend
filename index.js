@@ -133,6 +133,7 @@ app.get('/user', (req, res) => {
       return console.log(err);
     }
     console.log("responseeeeee: ", response);
+    res.send(response)
     res.json(response);
   })
 })

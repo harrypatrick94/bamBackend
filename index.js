@@ -99,7 +99,7 @@ let User = mongoose.model('User', userSchema)
 // add wines
 app.post('/add', (req, res) => {
 
-  const {wineName, description, img} = req.body
+  const {wineName, description, img} = req.query
   console.log(req.body);
   console.log(req.body.img);
   if (!wineName || !description || !img) {

@@ -61,7 +61,7 @@ router.post('/send', (req, res, next) => {
   })
 })
 
-mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true} )
+mongoose.connect('mongodb://http://ec2-52-62-179-225.ap-southeast-2.compute.amazonaws.com', {useNewUrlParser: true} )
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 const wineSchema = new mongoose.Schema({
@@ -95,6 +95,33 @@ const userSchema = new mongoose.Schema({
 })
 
 let User = mongoose.model('User', userSchema)
+
+// add wines
+app.post('/add', (req, res) => {
+
+  const {wineName, description, img} = req.body
+  console.log(req.body);
+  console.log(req.body.img);
+  if (!wineName || !description || !img) {
+  return res.status(400).json({msg: "Please enter all fields"})
+  }
+  const newWine = new Wine({
+      wineName,
+      description,
+      img
+    })
+
+  newWine.save()
+  .then( wine => {
+    res.json({
+      wine: {
+        name: wine.wineName,
+        description: wine.description,
+        img: wine.img
+      }
+    })
+  })
+})
 
 // find all wines
 app.get('/user', (req, res) => {

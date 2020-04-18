@@ -136,7 +136,7 @@ app.get('/user', (req, res) => {
   })
 })
 
-app.get('/test', (req, res) => {
+app.get('/testing', (req, res) => {
   res.send('hello world')
 })
 

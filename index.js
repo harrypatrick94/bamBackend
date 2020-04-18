@@ -229,7 +229,7 @@ app.post('/register', (req, res) => {
 
 // sigIn user
 app.post('/signIn', (req, res) => {
-  res.send(`body ${req.query}`)
+  res.send(`query ${req.query.userName}`)
 //   const {userName, password} = req.body
 // if (!userName || !password) {
 //   return res.status(400).json({msg: "Please enter all fields"})

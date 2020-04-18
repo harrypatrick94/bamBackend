@@ -137,9 +137,8 @@ app.get('/user', (req, res) => {
 })
 
 app.get('/user/:name', (req, res) => {
-  // console.log("req: ", req);
-  // console.log("res: ", res);
-  res.send(req.params.name)
+
+  // res.send(req.params.name)
   Wine.find({wineName: req.params.name},(err, response) => {
     if (err) {
       return res.send('cant find');

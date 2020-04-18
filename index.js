@@ -178,7 +178,7 @@ app.delete('/user/:name', (req, res) => {
 }) // delete single wine
 // create user
 app.post('/register', (req, res) => {
-  res.send(req.body)
+  res.send(req.query)
 //   const {userName, password} = req.body
 // //   // small validation
 //   if (!userName || !password) {

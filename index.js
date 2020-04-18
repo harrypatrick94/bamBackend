@@ -148,6 +148,26 @@ app.get('/user/:name', (req, res) => {
   })
 })
 
+app.put('/user/:name', (req, res) => {
+
+  const newName = req.body.newName
+  const newDescription = req.body.newDescription
+  const newImg = req.body.newImg
+  const id = req.body.id
+  console.log(newName, newDescription, newImg, id);
+  Wine.findByIdAndUpdate(id, { "$set": {wineName: newName, description: newDescription, img: newImg}}, function(err, wine){
+
+   if(err) {
+       console.log(err);
+
+       res.status(500).send(err);
+   } else {
+
+      res.status(200).send(wine);
+   }
+ })// findOneAndUpdate
+})
+
 app.get('/testing', (req, res) => {
   res.send('hello world')
 })

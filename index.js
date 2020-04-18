@@ -121,7 +121,6 @@ app.post('/add', (req, res) => {
       }
     })
   })
-  // .then(res.send(`saved ${newWine}`))
 })
 
 // find all wines

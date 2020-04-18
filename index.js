@@ -36,7 +36,7 @@ transporter.verify((error, success) => {
 });
 
 router.post('/send', (req, res, next) => {
-  console.log(req.query);
+  console.log(req.body);
   let name = req.body.name
   let email = req.body.email
   let message = req.body.message
@@ -101,8 +101,8 @@ let User = mongoose.model('User', userSchema)
 // add wines
 app.post('/add', (req, res) => {
 
-  const {wineName, description, img} = req.query
-  // res.send(req.query)
+  const {wineName, description, img} = req.body
+  // res.send(req.body)
   if (!wineName || !description || !img) {
   return res.status(400).json({msg: "Please enter all fields"})
   }
@@ -151,10 +151,10 @@ app.get('/user/:name', (req, res) => {
 // update wine
 app.put('/user/:name', (req, res) => {
 
-  const newName = req.query.newName
-  const newDescription = req.query.newDescription
-  const newImg = req.query.newImg
-  const id = req.query.id
+  const newName = req.body.newName
+  const newDescription = req.body.newDescription
+  const newImg = req.body.newImg
+  const id = req.body.id
   // res.send(`hello put ${id}`);
   Wine.findByIdAndUpdate(id, { "$set": {wineName: newName, description: newDescription, img: newImg}}, function(err, wine){
 
@@ -180,8 +180,8 @@ app.delete('/user/:name', (req, res) => {
 }) // delete single wine
 // create user
 app.post('/register', (req, res) => {
-  // res.send(req.query)
-  const {userName, password} = req.query
+  // res.send(req.body)
+  const {userName, password} = req.body
 //   // small validation
   if (!userName || !password) {
     return res.status(400).json({msg: "Please enter all fields"})

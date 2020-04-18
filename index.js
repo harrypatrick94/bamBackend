@@ -143,7 +143,7 @@ app.get('/user/:name', (req, res) => {
     if (err) {
       return res.send('cant find');
     }
-    return res.send(response)
+    return res.json(response)
     // res.json(response);
   })
 })

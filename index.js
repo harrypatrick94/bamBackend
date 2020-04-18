@@ -65,6 +65,7 @@ router.post('/send', (req, res, next) => {
 mongoose.connect('mongodb+srv://bensonMooch:discojuice@cluster0-idibi.mongodb.net/test', {useNewUrlParser: true} )
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
+
 const wineSchema = new mongoose.Schema({
   wineName: {
     type: String,
@@ -226,7 +227,6 @@ app.post('/register', (req, res) => {
     }) // then
   res.send('register')
 }) // post
-
 // sigIn user
 app.post('/signIn', (req, res) => {
   const {userName, password} = req.query
@@ -268,7 +268,9 @@ User.findOne({userName})
       .catch(err => console.log("bcrypt: ", err))
   }) // then
   .catch(err => console.warn(err))
-})
+
+}) //signIn
+
 app.get('/testing', (req, res) => {
   res.send('hello world')
 })

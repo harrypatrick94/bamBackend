@@ -168,13 +168,13 @@ app.put('/user/:name', (req, res) => {
 })
 // delete single wine
 app.delete('/user/:name', (req, res) => {
-  res.send(req.params.name)
-  // Wine.deleteOne({ wineName: req.params.name }, function(err) {
-  //       if (err)
-  //           res.send(err);
-  //       else
-  //           res.json({ message: `${req.params.name}: Wine Deleted!`});
-  //   });
+  
+  Wine.deleteOne({ wineName: req.params.name }, function(err) {
+        if (err)
+            res.send(err);
+        else
+            res.json({ message: `${req.params.name}: Wine Deleted!`});
+    });
 }) // delete single wine
 
 app.get('/testing', (req, res) => {

@@ -140,13 +140,13 @@ app.get('/user/:name', (req, res) => {
   // console.log("req: ", req);
   // console.log("res: ", res);
   res.send(req.params.name)
-  // Wine.find({wineName: req.params.name},(err, response) => {
-  //   if (err) {
-  //     return console.log(err);
-  //   }
-  //   // console.log("responseeeeee: ", response);
-  //   res.json(response);
-  // })
+  Wine.find({wineName: req.params.name},(err, response) => {
+    if (err) {
+      return res.send('cant find');
+    }
+    return res.send(response)
+    // res.json(response);
+  })
 })
 
 app.get('/testing', (req, res) => {

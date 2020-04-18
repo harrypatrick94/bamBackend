@@ -168,7 +168,7 @@ app.put('/user/:name', (req, res) => {
 })
 // delete single wine
 app.delete('/user/:name', (req, res) => {
-  
+
   Wine.deleteOne({ wineName: req.params.name }, function(err) {
         if (err)
             res.send(err);
@@ -176,7 +176,55 @@ app.delete('/user/:name', (req, res) => {
             res.json({ message: `${req.params.name}: Wine Deleted!`});
     });
 }) // delete single wine
-
+// create user
+app.post('/register', (req, res) => {
+  res.send(req.body)
+//   const {userName, password} = req.body
+// //   // small validation
+//   if (!userName || !password) {
+//     return res.status(400).json({msg: "Please enter all fields"})
+//   }
+//   User.findOne({userName})
+//     .then(user => {
+//       if(user) {
+//         return res.status(400).json({ msg: "User already exists"})
+//       }// if
+// // create new user
+//       const newUser = new User({
+//         userName,
+//         password
+//       }) // new user
+//
+//       // create password hash
+//       bcrypt.genSalt(10, (err, salt) => {
+//         //salt the password
+//         bcrypt.hash(newUser.password, salt, (err, hash) => {
+//           if (err) throw err;
+//           // has the password
+//           newUser.password = hash;
+//           newUser.save()
+//             .then(user => {
+//               jwt.sign(
+//                 {id: user.id},
+//                 "ra_myjwtSecret",
+//                 {expiresIn: 7200},
+//                 (err, token) => {
+//                   if (err) throw err
+//                   res.json({
+//                     token,
+//                     user: {
+//                       id: user.id,
+//                       userName: user.userName
+//                   } // user
+//                 }) // res .json
+//               } //jwt callback
+//             ) // sign
+//           }) // then
+//         }) // hash
+//       }) // bcrypt
+//     }) // then
+//   res.send('register')
+}) // post
 app.get('/testing', (req, res) => {
   res.send('hello world')
 })

@@ -250,7 +250,7 @@ User.findOne({userName})
         jwt.sign(
             {id: user.id},
             // get secret
-            creds.jwtsecret,
+              "ra_myjwtSecret",
             {expiresIn: 7200},
             (err, token) => {
               // return token id, username

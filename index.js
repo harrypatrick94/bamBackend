@@ -61,7 +61,8 @@ router.post('/send', (req, res, next) => {
   })
 })
 
-mongoose.connect('mongodb://http://ec2-52-62-179-225.ap-southeast-2.compute.amazonaws.com', {useNewUrlParser: true} )
+mongoose.connect('mongodb+srv://bensonMooch:discojuice@cluster0-idibi.mongodb.net/test
+', {useNewUrlParser: true} )
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 const wineSchema = new mongoose.Schema({

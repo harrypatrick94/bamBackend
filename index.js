@@ -150,10 +150,10 @@ app.get('/user/:name', (req, res) => {
 
 app.put('/user/:name', (req, res) => {
 
-  const newName = req.body.newName
-  const newDescription = req.body.newDescription
-  const newImg = req.body.newImg
-  const id = req.body.id
+  const newName = req.query.newName
+  const newDescription = req.query.newDescription
+  const newImg = req.query.newImg
+  const id = req.query.id
   res.send(`hello put ${id}`);
 //   Wine.findByIdAndUpdate(id, { "$set": {wineName: newName, description: newDescription, img: newImg}}, function(err, wine){
 //

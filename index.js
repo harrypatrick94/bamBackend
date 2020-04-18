@@ -121,22 +121,20 @@ app.post('/add', (req, res) => {
       }
     })
   })
-  .then(res.send(`saved ${newWine}`))
+  // .then(res.send(`saved ${newWine}`))
 })
 
 // find all wines
 app.get('/user', (req, res) => {
   // res.send('wines')
 
-  Wine.find({},(err, response) => {
+  Wine.find({},(err, result) => {
     if (err) {
       // return console.log(err);
-    return res.send('err')
-  } else {
-    return res.send('response')
-  }
-
-    // res.json(response);
+        res.send('err')
+      } else {
+        res.json(result);
+    }// res.json(response);
   })
 })
 

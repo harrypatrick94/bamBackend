@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 let bodyParser = require('body-parser');
 const creds = require('./config/config.js');
+const auth = require('./auth');
 const PORT = 3000
 
 const app = express()
@@ -225,6 +226,16 @@ app.post('/register', (req, res) => {
     }) // then
   res.send('register')
 }) // post
+
+app.get('/users', auth, (req, res) => {
+  User.find({},(err, response) => {
+    if (err) {
+      return console.log(err);
+    }
+    // console.log("responseeeeee: ", response);
+    res.json(response);
+  })
+})
 app.get('/testing', (req, res) => {
   res.send('hello world')
 })

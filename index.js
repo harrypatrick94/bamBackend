@@ -227,14 +227,48 @@ app.post('/register', (req, res) => {
   res.send('register')
 }) // post
 
-app.get('/users', auth, (req, res) => {
-  User.find({},(err, response) => {
-    if (err) {
-      return console.log(err);
-    }
-    // console.log("responseeeeee: ", response);
-    res.json(response);
-  })
+// sigIn user
+app.post('/signIn', (req, res) => {
+  res.send(`body ${req.query}`)
+//   const {userName, password} = req.body
+// if (!userName || !password) {
+//   return res.status(400).json({msg: "Please enter all fields"})
+// }
+// if (userName) {
+//   console.log("user: ", userName);
+// }
+// // find user
+// User.findOne({userName})
+//   .then(user => {
+//     if(!user) {
+//       return res.status(400).json({ msg: "User does not exists"})
+//     }// if
+//     //validate password
+//     bcrypt.compare(password, user.password)
+//       .then(isMatch => {
+//         if (!isMatch) return res.status(400).json({msg: 'Invlaid credentials'});
+//         console.log("match");
+//         jwt.sign(
+//             {id: user.id},
+//             // get secret
+//             creds.jwtsecret,
+//             {expiresIn: 7200},
+//             (err, token) => {
+//               // return token id, username
+//               if (err) throw err
+//               res.json({
+//                 token,
+//                 user: {
+//                   id: user.id,
+//                   userName: user.userName,
+//               } // user
+//             }) // res .json
+//           } //jwt callback
+//         ) // sign
+//       })
+//       .catch(err => console.log("bcrypt: ", err))
+//   }) // then
+//   .catch(err => console.warn(err))
 })
 app.get('/testing', (req, res) => {
   res.send('hello world')

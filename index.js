@@ -102,27 +102,27 @@ let User = mongoose.model('User', userSchema)
 app.post('/add', (req, res) => {
 
   const {wineName, description, img} = req.body
-  // res.send(req.body)
-  if (!wineName || !description || !img) {
-  return res.status(400).json({msg: "Please enter all fields"})
-  }
-  //
-  const newWine = new Wine({
-      wineName,
-      description,
-      img
-    })
-  //
-  newWine.save()
-  .then( wine => {
-    res.json({
-      wine: {
-        name: wine.wineName,
-        description: wine.description,
-        img: wine.img
-      }
-    })
-  })
+  res.send(req.body)
+  // if (!wineName || !description || !img) {
+  // return res.status(400).json({msg: "Please enter all fields"})
+  // }
+  // //
+  // const newWine = new Wine({
+  //     wineName,
+  //     description,
+  //     img
+  //   })
+  // //
+  // newWine.save()
+  // .then( wine => {
+  //   res.json({
+  //     wine: {
+  //       name: wine.wineName,
+  //       description: wine.description,
+  //       img: wine.img
+  //     }
+  //   })
+  // })
 })
 // find all wines
 app.get('/user', (req, res) => {

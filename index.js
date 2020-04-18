@@ -104,7 +104,7 @@ app.post('/add', (req, res) => {
   const {wineName, description, img} = req.body
   // res.send(req.body)
   if (!wineName || !description || !img) {
-  return res.status(400).json({msg: "Please enter all fields"})
+  return res.status(400).json({msg: `wine ${wineName}, description ${description}, img ${img}`})
   }
   //
   const newWine = new Wine({

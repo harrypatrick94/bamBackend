@@ -126,7 +126,14 @@ app.post('/add', (req, res) => {
 
 // find all wines
 app.get('/user', (req, res) => {
-  res.send(Wine)
+  res.send(Wine.find({},(err, result) => {
+    if (err) {
+      // return console.log(err);
+        res.send('err')
+      } else {
+        res.json(result);
+    }// res.json(response);
+  }))
 
   // Wine.find({},(err, result) => {
   //   if (err) {

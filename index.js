@@ -176,12 +176,17 @@ app.post('/add', (req, res) => {
 // find all wines
 app.get('/user', (req, res) => {
 
+  let toReturn = {
+    wines: null,
+    sellers: null
+  }
   Wine.find({},(err, result) => {
     if (err) {
       // return console.log(err);
         res.send('err')
       } else {
-        res.json(result);
+        toReturn.wines = result
+        res.json(toReturn);
     }// res.json(response);
   })
 })

@@ -125,7 +125,27 @@ let Seller = mongoose.model('Seller', sellerSchema)
 app.post('/addSeller', (req, res) => {
   const {name, description, img, link} = req.query
 
-  res.send(`${name} ${description} ${img} ${link}`)
+  if (!name || !description || !img || !link) {
+  return res.status(400).json({msg: `wine ${name}, description ${description}, img ${img}, link ${link}`})
+  }
+
+  const newSeller = new Seller({
+      name,
+      description,
+      img
+    })
+  //
+  newSeller.save()
+  .then( seller => {
+    res.json({
+      seller: {
+        name: seller.name,
+        description: seller.description,
+        img: seller.img,
+        link: seller.link
+      }
+    })
+  })
 })
 // add wines
 app.post('/add', (req, res) => {

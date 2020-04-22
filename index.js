@@ -98,6 +98,28 @@ const userSchema = new mongoose.Schema({
 
 let User = mongoose.model('User', userSchema)
 
+const sellerSchema = new mongoose.Schema({
+  Name: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  img: {
+    data: Buffer,
+    type: String,
+    required: true
+  },
+  website: {
+    type:  String,
+    required: true
+  }
+
+})
+
+let Seller = mongoose.model('Seller', sellerSchema)
 // add wines
 app.post('/add', (req, res) => {
 

@@ -99,7 +99,7 @@ const userSchema = new mongoose.Schema({
 let User = mongoose.model('User', userSchema)
 
 const sellerSchema = new mongoose.Schema({
-  Name: {
+  name: {
     type: String,
     required: true
   },
@@ -112,7 +112,7 @@ const sellerSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  website: {
+  link: {
     type:  String,
     required: true
   }
@@ -120,6 +120,13 @@ const sellerSchema = new mongoose.Schema({
 })
 
 let Seller = mongoose.model('Seller', sellerSchema)
+
+// add seller
+app.post('/addSeller', (req, res) => {
+  const {name, description, img, link} = req.query
+
+  res.send(name, description, img, link)
+})
 // add wines
 app.post('/add', (req, res) => {
 

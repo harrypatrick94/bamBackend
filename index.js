@@ -123,7 +123,7 @@ let Seller = mongoose.model('Seller', sellerSchema)
 
 // add seller
 app.post('/addSeller', (req, res) => {
-  const {name, description, img, link} = req.body
+  const {name, description, img, link} = req.query
   if (!name || !description || !img || !link) {
   return res.status(400).json({msg: `wine ${name}, description ${description}, img ${img}, link ${link}`})
   }
@@ -259,6 +259,15 @@ app.put('/wines/:name', (req, res) => {
       res.status(200).send(wine);
    }
  })// findOneAndUpdate
+})
+// delete single seller
+app.delete('/sellers/:name', (req, res) => {
+  Seller.deleteOne({ name: req.params.name }, function(err) {
+        if (err)
+            res.send(err);
+        else
+            res.json({ message: `${req.params.name}: Wine Deleted!`});
+    });
 })
 // delete single wine
 app.delete('/wines/:name', (req, res) => {

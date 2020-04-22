@@ -222,7 +222,7 @@ app.get('/wines/:name', (req, res) => {
 // update seller
 app.put('/sellers/:name', (req, res) => {
 
-  const newName = req.query.name
+  const newName = req.query.newName
   const newDescription = req.query.newDescription
   const newImg = req.query.newImg
   const newLink = req.query.newLink

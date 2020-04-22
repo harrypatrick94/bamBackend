@@ -198,7 +198,7 @@ app.get('/wines', (req, res) => {
   })
 })
 //get single wine
-app.get('sellers/:name', (req, res) => {
+app.get('/sellers/:name', (req, res) => {
   Seller.find({name: req.params.name},(err, response) => {
     if (err) {
       return res.send('cant find');

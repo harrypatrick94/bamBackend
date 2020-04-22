@@ -123,8 +123,7 @@ let Seller = mongoose.model('Seller', sellerSchema)
 
 // add seller
 app.post('/addSeller', (req, res) => {
-  const {name, description, img, link} = req.query
-  console.log(req.query);
+  const {name, description, img, link} = req.body
   if (!name || !description || !img || !link) {
   return res.status(400).json({msg: `wine ${name}, description ${description}, img ${img}, link ${link}`})
   }
@@ -196,6 +195,16 @@ app.get('/wines', (req, res) => {
       } else {
         res.json(result);
     }// res.json(response);
+  })
+})
+//get single wine
+app.get('sellers/:name' (req,res) => {
+  Seller.find({name: req.params.name},(err, response) => {
+    if (err) {
+      return res.send('cant find');
+    }
+    return res.json(response)
+    // res.json(response);
   })
 })
 // single wine

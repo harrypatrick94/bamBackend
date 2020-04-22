@@ -174,7 +174,7 @@ app.post('/add', (req, res) => {
   })
 })
 // find all sellers
-app.get()
+
 // find all wines
 app.get('/wines', (req, res) => {
 

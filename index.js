@@ -175,34 +175,15 @@ app.post('/add', (req, res) => {
 })
 // find all wines
 app.get('/user', (req, res) => {
-
-  let toReturn = {
-    wines: null,
-    sellers: null
-  }
+  
   Wine.find({},(err, result) => {
     if (err) {
       // return console.log(err);
         res.send('err')
       } else {
-        toReturn.wines = result
+        res.json(result);
     }// res.json(response);
   })
-
-  Seller.find({},(err, result) => {
-    if (err) {
-      // return console.log(err);
-        res.send('err')
-      } else {
-        toReturn.sellers = result
-    }// res.json(response);
-  })
-
-  if (toReturn.wines || toReturn.sellers) {
-    res.send('null')
-  } else {
-    res.json(toReturn)
-  }
 })
 // single wine
 app.get('/user/:name', (req, res) => {

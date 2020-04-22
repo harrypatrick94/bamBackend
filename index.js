@@ -219,6 +219,27 @@ app.get('/wines/:name', (req, res) => {
     // res.json(response);
   })
 })
+// update seller
+app.put('/sellers/:name', (req, res) => {
+
+  const newName = req.query.name
+  const newDescription = req.query.newDescription
+  const newImg = req.query.newImg
+  const newLink = req.query.newLink
+  const id = req.query.id
+  // res.send(`hello put ${id}`);
+  Seller.findByIdAndUpdate(id, { "$set": {name: newName, description: newDescription, img: newImg, link: newLink}}, function(err, seller){
+
+   if(err) {
+       console.log(err);
+
+       res.status(500).send(err);
+   } else {
+
+      res.status(200).send(seller);
+   }
+ })// findOneAndUpdate
+})
 // update wine
 app.put('/wines/:name', (req, res) => {
 
@@ -248,7 +269,7 @@ app.delete('/wines/:name', (req, res) => {
         else
             res.json({ message: `${req.params.name}: Wine Deleted!`});
     });
-}) // delete single wine
+})
 // create user
 app.post('/register', (req, res) => {
   // res.send(req.body)

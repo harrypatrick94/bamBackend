@@ -173,9 +173,11 @@ app.post('/add', (req, res) => {
     })
   })
 })
+// find all sellers
+app.get()
 // find all wines
-app.get('/user', (req, res) => {
-  
+app.get('/wines', (req, res) => {
+
   Wine.find({},(err, result) => {
     if (err) {
       // return console.log(err);
@@ -186,7 +188,7 @@ app.get('/user', (req, res) => {
   })
 })
 // single wine
-app.get('/user/:name', (req, res) => {
+app.get('/wines/:name', (req, res) => {
 
   // res.send(req.params.name)
   Wine.find({wineName: req.params.name},(err, response) => {
@@ -198,7 +200,7 @@ app.get('/user/:name', (req, res) => {
   })
 })
 // update wine
-app.put('/user/:name', (req, res) => {
+app.put('/wines/:name', (req, res) => {
 
   const newName = req.body.newName
   const newDescription = req.body.newDescription
@@ -218,7 +220,7 @@ app.put('/user/:name', (req, res) => {
  })// findOneAndUpdate
 })
 // delete single wine
-app.delete('/user/:name', (req, res) => {
+app.delete('/wines/:name', (req, res) => {
 
   Wine.deleteOne({ wineName: req.params.name }, function(err) {
         if (err)

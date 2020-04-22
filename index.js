@@ -125,7 +125,7 @@ let Seller = mongoose.model('Seller', sellerSchema)
 app.post('/addSeller', (req, res) => {
   const {name, description, img, link} = req.query
 
-  res.send(name, description, img, link)
+  res.send(`${name} ${description} ${img} ${link}`)
 })
 // add wines
 app.post('/add', (req, res) => {

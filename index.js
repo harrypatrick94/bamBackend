@@ -188,6 +188,7 @@ app.get('/user', (req, res) => {
         toReturn.wines = result
     }// res.json(response);
   })
+
   Seller.find({},(err, result) => {
     if (err) {
       // return console.log(err);
@@ -197,7 +198,11 @@ app.get('/user', (req, res) => {
     }// res.json(response);
   })
 
-  return res.send(toReturn)
+  if (toReturn.wines || toReturn.sellers) {
+    res.send('null')
+  } else {
+    res.json(toReturn)
+  }
 })
 // single wine
 app.get('/user/:name', (req, res) => {

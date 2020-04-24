@@ -123,7 +123,7 @@ let Seller = mongoose.model('Seller', sellerSchema)
 
 // add seller
 app.post('/addSeller', (req, res) => {
-  const {name, description, img, link} = req.query
+  const {name, description, img, link} = req.body
   if (!name || !description || !img || !link) {
   return res.status(400).json({msg: `wine ${name}, description ${description}, img ${img}, link ${link}`})
   }
@@ -222,11 +222,11 @@ app.get('/wines/:name', (req, res) => {
 // update seller
 app.put('/sellers/:name', (req, res) => {
 
-  const newName = req.query.newName
-  const newDescription = req.query.newDescription
-  const newImg = req.query.newImg
-  const newLink = req.query.newLink
-  const id = req.query.id
+  const newName = req.body.newName
+  const newDescription = req.body.newDescription
+  const newImg = req.body.newImg
+  const newLink = req.body.newLink
+  const id = req.body.id
   // res.send(`hello put ${id}`);
   Seller.findByIdAndUpdate(id, { "$set": {name: newName, description: newDescription, img: newImg, link: newLink}}, function(err, seller){
 
@@ -375,5 +375,4 @@ User.findOne({userName})
 app.get('/testing', (req, res) => {
   res.send('hello world')
 })
-
 app.listen(PORT, () => { console.log(`started on ${PORT}`)})

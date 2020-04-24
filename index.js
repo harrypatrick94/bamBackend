@@ -222,22 +222,22 @@ app.get('/wines/:name', (req, res) => {
 // update seller
 app.put('/sellers/:name', (req, res) => {
 
-  const newName = req.body.newName
-  const newDescription = req.body.newDescription
-  const newImg = req.body.newImg
-  const newLink = req.body.newLink
-  const id = req.body.id
-  res.send(`hello ${id} name ${newName} description ${newDescription}, img ${newImg} link ${newLink}`);
-  // Seller.findByIdAndUpdate(id, { "$set": {name: newName, description: newDescription, img: newImg, link: newLink}}, function(err, seller){
-  //
-  //  if(err) {
-  //      console.log(err);
-  //
-  //      res.status(500).send(err);
-  //  } else {
-  //
-  //     res.status(200).send(seller);
-  //  }
+  const newName = req.query.newName
+  const newDescription = req.query.newDescription
+  const newImg = req.query.newImg
+  const newLink = req.query.newLink
+  const id = req.query.id
+  // res.send(`hello put ${id}`);
+  Seller.findByIdAndUpdate(id, { "$set": {name: newName, description: newDescription, img: newImg, link: newLink}}, function(err, seller){
+
+   if(err) {
+       console.log(err);
+
+       res.status(500).send(err);
+   } else {
+
+      res.status(200).send(seller);
+   }
  })// findOneAndUpdate
 })
 // update wine

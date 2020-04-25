@@ -6,9 +6,10 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
-const Wine = require('./schemas/wine.js');
-const User = require('./schemas/user.js');
-const Seller = require('./schemas/seller.js');
+const Wine = require('./models/wine.js');
+const wine = require('./routes/wine/wine.js')
+const User = require('./models/user.js');
+const Seller = require('./models/seller.js');
 const creds = require('./config/config.js');
 const auth = require('./auth');
 const PORT = 3000
@@ -17,6 +18,7 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(express.json())
 app.use('/', router)
+app.use('/', wine)
 
 let transport = {
     host: 'smtp.gmail.com', // Don’t forget to replace with the SMTP host of your provider
@@ -133,17 +135,6 @@ app.get('/sellers', (req, res) => {
   })
 })
 // find all wines
-app.get('/wines', (req, res) => {
-
-  Wine.find({},(err, result) => {
-    if (err) {
-      // return console.log(err);
-        res.send('err')
-      } else {
-        res.json(result);
-    }// res.json(response);
-  })
-})
 //get single wine
 app.get('/sellers/:name', (req, res) => {
   Seller.find({name: req.params.name},(err, response) => {
@@ -155,17 +146,6 @@ app.get('/sellers/:name', (req, res) => {
   })
 })
 // single wine
-app.get('/wines/:name', (req, res) => {
-
-  // res.send(req.params.name)
-  Wine.find({wineName: req.params.name},(err, response) => {
-    if (err) {
-      return res.send('cant find');
-    }
-    return res.json(response)
-    // res.json(response);
-  })
-})
 // update seller
 app.put('/sellers/:name', (req, res) => {
 
@@ -318,7 +298,4 @@ User.findOne({userName})
 
 }) //signIn
 
-app.get('/testing', (req, res) => {
-  res.send('hello world')
-})
 app.listen(PORT, () => { console.log(`started on ${PORT}`)})

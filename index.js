@@ -1,15 +1,17 @@
-let express = require('express');
-let router = express.Router();
-let nodemailer = require('nodemailer');
-let cors = require('cors');
-let mongoose = require('mongoose');
+const express = require('express');
+const router = express.Router();
+const nodemailer = require('nodemailer');
+const cors = require('cors');
+const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-let bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
+const Wine = require('./schemas/wine.js');
+const User = require('./schemas/user.js');
+const Seller = require('./schemas/seller.js');
 const creds = require('./config/config.js');
 const auth = require('./auth');
 const PORT = 3000
-
 const app = express()
 app.use(cors())
 app.use(bodyParser.json())
@@ -65,61 +67,6 @@ router.post('/send', (req, res, next) => {
 mongoose.connect('mongodb+srv://bensonMooch:discojuice@cluster0-idibi.mongodb.net/test', {useNewUrlParser: true} )
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-
-const wineSchema = new mongoose.Schema({
-  wineName: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  img: {
-    data: Buffer,
-    type: String,
-    required: true
-  },
-
-})
-
-let Wine = mongoose.model('Wine', wineSchema)
-
-const userSchema = new mongoose.Schema({
-  userName: {
-    type: String,
-    required: true
-  },
-  password: {
-    type: String,
-    required: true
-  }
-})
-
-let User = mongoose.model('User', userSchema)
-
-const sellerSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  img: {
-    data: Buffer,
-    type: String,
-    required: true
-  },
-  link: {
-    type:  String,
-    required: true
-  }
-
-})
-
-let Seller = mongoose.model('Seller', sellerSchema)
 
 // add seller
 app.post('/addSeller', (req, res) => {

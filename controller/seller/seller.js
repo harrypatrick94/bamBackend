@@ -1,4 +1,4 @@
-bodyconst Seller = require('../../models/seller.js');
+const Seller = require('../../models/seller.js');
 
 module.exports = {
   getAllSellers(req, res){

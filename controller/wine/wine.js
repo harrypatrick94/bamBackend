@@ -1,7 +1,6 @@
 const Wine = require('../../models/wine.js');
 
 module.exports = {
-
   getAllWines(req, res){
     Wine.find({},(err, result) => {
       if (err) {

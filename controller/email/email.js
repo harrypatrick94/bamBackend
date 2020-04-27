@@ -22,7 +22,7 @@ transporter.verify((error, success) => {
 module.exports = {
 
   sendMail(req, res){
-    const {name, email, message} = req.query
+    const {name, email, message} = req.body
     const content = `name: ${name} \n email: ${email} \n message: ${message} `
     const mail = {
       from: name,

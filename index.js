@@ -9,7 +9,7 @@ const seller = require('./routes/seller/seller.js');
 const User = require('./models/user.js');
 
 const creds = require('./config/config.js');
-const auth = require('./auth');
+// const auth = require('./auth');
 const PORT = 3000
 const app = express()
 app.use(cors())
@@ -39,19 +39,15 @@ transporter.verify((error, success) => {
 });
 
 router.post('/send', (req, res, next) => {
-  console.log(req.body);
-  let name = req.body.name
-  let email = req.body.email
-  let message = req.body.message
-  let content = `name: ${name} \n email: ${email} \n message: ${message} `
 
+  const {name, email, message} = req.body
+  let content = `name: ${name} \n email: ${email} \n message: ${message} `
   let mail = {
     from: name,
     to: 'bensonandthemooch@gmail.com',  // Change to email address that you want to receive messages on
     subject: 'New Message from Contact Form',
     text: content
   }
-
   transporter.sendMail(mail, (err, data) => {
     if (err) {
       res.json({
@@ -68,5 +64,95 @@ router.post('/send', (req, res, next) => {
 mongoose.connect('mongodb+srv://bensonMooch:discojuice@cluster0-idibi.mongodb.net/test', {useNewUrlParser: true, useFindAndModify: false} )
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-
+// create user
+// app.post('/register', (req, res) => {
+//   // res.send(req.body)
+//   const {userName, password} = req.body
+// //   // small validation
+//   if (!userName || !password) {
+//     return res.status(400).json({msg: "Please enter all fields"})
+//   }
+//   User.findOne({userName})
+//     .then(user => {
+//       if(user) {
+//         return res.status(400).json({ msg: "User already exists"})
+//       }// if
+// // create new user
+//       const newUser = new User({
+//         userName,
+//         password
+//       }) // new user
+//
+//       // create password hash
+//       bcrypt.genSalt(10, (err, salt) => {
+//         //salt the password
+//         bcrypt.hash(newUser.password, salt, (err, hash) => {
+//           if (err) throw err;
+//           // has the password
+//           newUser.password = hash;
+//           newUser.save()
+//             .then(user => {
+//               jwt.sign(
+//                 {id: user.id},
+//                 "ra_myjwtSecret",
+//                 {expiresIn: 7200},
+//                 (err, token) => {
+//                   if (err) throw err
+//                   res.json({
+//                     token,
+//                     user: {
+//                       id: user.id,
+//                       userName: user.userName
+//                   } // user
+//                 }) // res .json
+//               } //jwt callback
+//             ) // sign
+//           }) // then
+//         }) // hash
+//       }) // bcrypt
+//     }) // then
+//   res.send('register')
+// }) // post
+//
+// app.post('/signIn', (req, res) => {
+//   const {userName, password} = req.body
+//   if (!userName || !password) {
+//     return res.status(400).json({msg: "Please enter all fields"})
+//   }
+//   if (userName) {
+//     console.log("user: ", userName);
+//   }
+// // find user
+// User.findOne({userName})
+//   .then(user => {
+//     if(!user) {
+//       return res.status(400).json({ msg: "User does not exists"})
+//     }// if
+//     //validate password
+//     bcrypt.compare(password, user.password)
+//       .then(isMatch => {
+//         if (!isMatch) return res.status(400).json({msg: 'Invlaid credentials'});
+//         jwt.sign(
+//             {id: user.id},
+//             // get secret
+//               "ra_myjwtSecret",
+//             {expiresIn: 7200},
+//             (err, token) => {
+//               // return token id, username
+//               if (err) throw err
+//               res.json({
+//                 token,
+//                 user: {
+//                   id: user.id,
+//                   userName: user.userName,
+//               } // user
+//             }) // res .json
+//           } //jwt callback
+//         ) // sign
+//       })
+//       .catch(err => console.log("bcrypt: ", err))
+//   }) // then
+//   .catch(err => console.warn(err))
+//
+// }) //signIn
 app.listen(PORT, () => { console.log(`started on ${PORT}`)})

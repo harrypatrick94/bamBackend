@@ -1,4 +1,4 @@
-// const creds = require('./config/config.js');
+
 const jwt = require('jsonwebtoken');
 
 function auth(req, res, next){

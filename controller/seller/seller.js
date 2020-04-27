@@ -1,6 +1,7 @@
 const Seller = require('../../models/seller.js');
 
 module.exports = {
+
   getAllSellers(req, res){
     Seller.find({},(err, result) => {
       if (err) {
@@ -67,4 +68,5 @@ module.exports = {
             res.json({ message: `${req.params.name}: Seller Deleted!`});
     });
   }
+  
 }

@@ -6,10 +6,10 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
-const Wine = require('./models/wine.js');
-const wine = require('./routes/wine/wine.js')
+const wine = require('./routes/wine/wine.js');
+const seller = require('./routes/seller/seller.js');
 const User = require('./models/user.js');
-const Seller = require('./models/seller.js');
+
 const creds = require('./config/config.js');
 const auth = require('./auth');
 const PORT = 3000
@@ -18,7 +18,8 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(express.json())
 app.use('/', router)
-app.use('/', wine)
+app.use('/wines', wine)
+app.use('/sellers', seller)
 
 let transport = {
     host: 'smtp.gmail.com', // Don’t forget to replace with the SMTP host of your provider
@@ -66,145 +67,9 @@ router.post('/send', (req, res, next) => {
   })
 })
 
-mongoose.connect('mongodb+srv://bensonMooch:discojuice@cluster0-idibi.mongodb.net/test', {useNewUrlParser: true} )
+mongoose.connect('mongodb+srv://bensonMooch:discojuice@cluster0-idibi.mongodb.net/test', {useNewUrlParser: true, useFindAndModify: false} )
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-
-// add seller
-app.post('/addSeller', (req, res) => {
-  const {name, description, img, link} = req.body
-  if (!name || !description || !img || !link) {
-  return res.status(400).json({msg: `wine ${name}, description ${description}, img ${img}, link ${link}`})
-  }
-
-  const newSeller = new Seller({
-      name,
-      description,
-      img,
-      link
-    })
-  //
-  newSeller.save()
-  .then( seller => {
-    res.json({
-      seller: {
-        name: seller.name,
-        description: seller.description,
-        img: seller.img,
-        link: seller.link
-      }
-    })
-  })
-})
-// add wines
-app.post('/add', (req, res) => {
-
-  const {wineName, description, img} = req.body
-  // res.send(req.body)
-  if (!wineName || !description || !img) {
-  return res.status(400).json({msg: `wine ${wineName}, description ${description}, img ${img}`})
-  }
-  //
-  const newWine = new Wine({
-      wineName,
-      description,
-      img
-    })
-  //
-  newWine.save()
-  .then( wine => {
-    res.json({
-      wine: {
-        name: wine.wineName,
-        description: wine.description,
-        img: wine.img
-      }
-    })
-  })
-})
-// find all sellers
-app.get('/sellers', (req, res) => {
-
-  Seller.find({},(err, result) => {
-    if (err) {
-      // return console.log(err);
-        res.send('err')
-      } else {
-        res.json(result);
-    }// res.json(response);
-  })
-})
-// find all wines
-//get single wine
-app.get('/sellers/:name', (req, res) => {
-  Seller.find({name: req.params.name},(err, response) => {
-    if (err) {
-      return res.send('cant find');
-    }
-    return res.json(response)
-    // res.json(response);
-  })
-})
-// single wine
-// update seller
-app.put('/sellers/:name', (req, res) => {
-
-  const newName = req.body.newName
-  const newDescription = req.body.newDescription
-  const newImg = req.body.newImg
-  const newLink = req.body.newLink
-  const id = req.body.id
-  Seller.findByIdAndUpdate(id, { "$set": {name: newName, description: newDescription, img: newImg, link: newLink}}, function(err, seller){
-
-   if(err) {
-       console.log(err);
-
-       res.status(500).send(err);
-   } else {
-
-      res.status(200).send(seller);
-   }
- })// findOneAndUpdate
-})
-// update wine
-app.put('/wines/:name', (req, res) => {
-
-  const newName = req.body.newName
-  const newDescription = req.body.newDescription
-  const newImg = req.body.newImg
-  const id = req.body.id
-  // res.send(`hello put ${id}`);
-  Wine.findByIdAndUpdate(id, { "$set": {wineName: newName, description: newDescription, img: newImg}}, function(err, wine){
-
-   if(err) {
-       console.log(err);
-
-       res.status(500).send(err);
-   } else {
-
-      res.status(200).send(wine);
-   }
- })// findOneAndUpdate
-})
-// delete single seller
-app.delete('/sellers/:name', (req, res) => {
-  Seller.deleteOne({ name: req.params.name }, function(err) {
-        if (err)
-            res.send(err);
-        else
-            res.json({ message: `${req.params.name}: Wine Deleted!`});
-    });
-})
-// delete single wine
-app.delete('/wines/:name', (req, res) => {
-
-  Wine.deleteOne({ wineName: req.params.name }, function(err) {
-        if (err)
-            res.send(err);
-        else
-            res.json({ message: `${req.params.name}: Wine Deleted!`});
-    });
-})
 // create user
 app.post('/register', (req, res) => {
   // res.send(req.body)
@@ -297,5 +162,4 @@ User.findOne({userName})
   .catch(err => console.warn(err))
 
 }) //signIn
-
 app.listen(PORT, () => { console.log(`started on ${PORT}`)})

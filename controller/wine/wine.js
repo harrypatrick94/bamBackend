@@ -21,5 +21,51 @@ module.exports = {
       return res.json(response)
       // res.json(response);
     })
-  }
+  },
+  addWine(req,res){
+    const {wineName, description, img} = req.body
+    // res.send(req.body)
+    if (!wineName || !description || !img) {
+    return res.status(400).json({msg: `wine ${wineName}, description ${description}, img ${img}`})
+    }
+    //
+    const newWine = new Wine({
+        wineName,
+        description,
+        img
+      })
+    //
+    newWine.save()
+    .then( wine => {
+      res.json({
+        wine: {
+          name: wine.wineName,
+          description: wine.description,
+          img: wine.img
+        }
+      })
+    })
+  },
+  updateWine(req, res){
+    const {newName, newDescription, newImg, id} = req.body
+    Wine.findByIdAndUpdate(id, { "$set": {wineName: newName, description: newDescription, img: newImg}}, function(err, wine){
+
+     if(err) {
+         console.log(err);
+
+         res.status(500).send(err);
+     } else {
+
+        res.status(200).send(wine);
+     }
+   })
+ },
+  deleteWine(req, res){
+   Wine.deleteOne({ wineName: req.params.name }, function(err) {
+         if (err)
+             res.send(err);
+         else
+             res.json({ message: `${req.params.name}: Wine Deleted!`});
+    });
+ }
 }

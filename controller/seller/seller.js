@@ -1,4 +1,4 @@
-const Seller = require('../../models/seller.js');
+bodyconst Seller = require('../../models/seller.js');
 
 module.exports = {
   getAllSellers(req, res){
@@ -46,7 +46,7 @@ module.exports = {
     })
   },
   updateSeller(req, res){
-    const {newName, newDescription, newImg, newLink, id} = req.query
+    const {newName, newDescription, newImg, newLink, id} = req.body
     Seller.findByIdAndUpdate(id, { "$set": {name: newName, description: newDescription, img: newImg, link: newLink}}, function(err, seller){
 
      if(err) {

@@ -68,5 +68,5 @@ module.exports = {
             res.json({ message: `${req.params.name}: Seller Deleted!`});
     });
   }
-  
+
 }

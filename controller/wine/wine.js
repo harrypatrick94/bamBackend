@@ -46,7 +46,11 @@ module.exports = {
     })
   },
   updateWine(req, res){
+
     const {newName, newDescription, newImg, id} = req.body
+    if (!newName || !newDescription || !newImg || !id) {
+    return res.status(400).json({msg: `enter all feilds:  newName: ${newName}, newDescription: ${newDescription}, newImg: ${newImg},  id: ${id}`})
+    }
     Wine.findByIdAndUpdate(id, { "$set": {wineName: newName, description: newDescription, img: newImg}}, function(err, wine){
 
      if(err) {

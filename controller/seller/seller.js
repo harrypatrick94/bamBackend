@@ -47,7 +47,7 @@ module.exports = {
     })
   },
   updateSeller(req, res){
-    const {newName, newDescription, newImg, newLink, id} = req.query
+    const {newName, newDescription, newImg, newLink, id} = req.body
     if (!newName || !newDescription || !newImg || !newLink || !id) {
     return res.status(400).json({msg: `enter all feilds:  newName: ${newName}, newDescription: ${newDescription}, newImg: ${newImg}, newLinklink: ${newLink}, id: ${id}`})
     }

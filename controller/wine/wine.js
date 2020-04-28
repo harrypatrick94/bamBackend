@@ -22,16 +22,17 @@ module.exports = {
     })
   },
   addWine(req,res){
-    const {wineName, description, img} = req.body
+    const {wineName, description, img, fizzFactor} = req.body
     // res.send(req.body)
     if (!wineName || !description || !img) {
-    return res.status(400).json({msg: `wine ${wineName}, description ${description}, img ${img}`})
+    return res.status(400).json({msg: `wine ${wineName}, description ${description}, img ${img}, fizz ${fizzFactor}`})
     }
     //
     const newWine = new Wine({
         wineName,
         description,
-        img
+        img,
+        fizzFactor
       })
     //
     newWine.save()
@@ -40,18 +41,19 @@ module.exports = {
         wine: {
           name: wine.wineName,
           description: wine.description,
-          img: wine.img
+          img: wine.img,
+          img: wine.fizzFactor
         }
       })
     })
   },
   updateWine(req, res){
 
-    const {newName, newDescription, newImg, id} = req.body
-    if (!newName || !newDescription || !newImg || !id) {
+    const {newName, newDescription, newImg, newFizzFactor, id} = req.body
+    if (!newName || !newDescription || !newImg || !newFizzFactor || !id) {
     return res.status(400).json({msg: `enter all feilds:  newName: ${newName}, newDescription: ${newDescription}, newImg: ${newImg},  id: ${id}`})
     }
-    Wine.findByIdAndUpdate(id, { "$set": {wineName: newName, description: newDescription, img: newImg}}, function(err, wine){
+    Wine.findByIdAndUpdate(id, { "$set": {wineName: newName, description: newDescription, img: newImg, fizzFactor: newFizzFactor }}, function(err, wine){
 
      if(err) {
          console.log(err);

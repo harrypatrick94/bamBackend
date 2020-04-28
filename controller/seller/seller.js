@@ -48,7 +48,7 @@ module.exports = {
   },
   updateSeller(req, res){
     const {newName, newDescription, newImg, newLink, id} = req.body
-    if (!newName || !newDescription || !newImg || !newLink || !id) {
+    if (!newName || !newDescription || !newImg || !id) {
     return res.status(400).json({msg: `enter all feilds:  newName: ${newName}, newDescription: ${newDescription}, newImg: ${newImg}, newLinklink: ${newLink}, id: ${id}`})
     }
     Seller.findByIdAndUpdate(id, { "$set": {name: newName, description: newDescription, img: newImg, link: newLink}}, function(err, seller){

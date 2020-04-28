@@ -10,10 +10,13 @@ const wineSchema = new mongoose.Schema({
     required: true,
   },
   img: {
-    data: Buffer,
     type: String,
     required: true
   },
+  fizzFactor: {
+    type: String,
+    required: false
+  }
 
 })
 

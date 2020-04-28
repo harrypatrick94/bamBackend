@@ -1,11 +1,12 @@
 const nodemailer = require('nodemailer');
+const creds = require('../../creds.js')
 
 const transport = {
     host: 'smtp.gmail.com', // Don’t forget to replace with the SMTP host of your provider
     port: 587,
     auth: {
-    user: 'bensonandthemooch@gmail.com',
-    pass: 'discojuice'
+    user: creds.username,
+    pass: creds.password
   }
 }
 
@@ -20,7 +21,7 @@ transporter.verify((error, success) => {
 });
 
 module.exports = {
- 
+
   sendMail(req, res){
     const {name, email, message} = req.body
     const content = `name: ${name} \n email: ${email} \n message: ${message} `

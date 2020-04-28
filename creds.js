@@ -1,6 +1,6 @@
 module.exports = {
-    user: 'bensonandthemooch@gmail.com',
-    pass: 'discojuice',
+    username: 'bensonandthemooch@gmail.com',
+    password: 'discojuice',
     jwtsecret: "ra_myjwtSecret",
     mongodb: 'bensonMooch:discojuice'
 }

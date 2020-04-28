@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const creds = require('../../creds.js')
 const User = require('../../models/user.js');
 
 module.exports = {
@@ -30,7 +31,7 @@ module.exports = {
               .then(user => {
                 jwt.sign(
                   {id: user.id},
-                  "ra_myjwtSecret",
+                  creds.jwtsecret,
                   {expiresIn: 7200},
                   (err, token) => {
                     if (err) throw err
@@ -71,7 +72,7 @@ module.exports = {
           jwt.sign(
               {id: user.id},
               // get secret
-                "ra_myjwtSecret",
+                creds.jwtsecret,
               {expiresIn: 7200},
               (err, token) => {
                 // return token id, username

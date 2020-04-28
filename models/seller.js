@@ -16,6 +16,10 @@ const sellerSchema = new mongoose.Schema({
   },
   link: {
     type:  String,
+    required: false
+  },
+  business: {
+    type: String,
     required: true
   }
 

@@ -15,7 +15,7 @@ const wineSchema = new mongoose.Schema({
   },
   fizzFactor: {
     type: String,
-    required: false
+    required: true
   }
 
 })

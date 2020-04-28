@@ -20,8 +20,7 @@ app.use('/sellers', seller)
 app.use('/', user)
 app.use('/', email)
 
-
-mongoose.connect('mongodb+srv://bensonMooch:discojuice@cluster0-idibi.mongodb.net/test', {useNewUrlParser: true, useFindAndModify: false} )
+mongoose.connect(`mongodb+srv://${creds.mongodb}@cluster0-idibi.mongodb.net/test`, {useNewUrlParser: true, useFindAndModify: false} )
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 

@@ -7,8 +7,8 @@ const wine = require('./routes/wine/wine.js');
 const seller = require('./routes/seller/seller.js');
 const user = require('./routes/user/user.js');
 const email = require('./routes/email/email.js');
-const creds = require('./creds.js');
 
+// const auth = require('./auth');
 const PORT = 3000
 const app = express()
 app.use(cors())
@@ -20,7 +20,8 @@ app.use('/sellers', seller)
 app.use('/', user)
 app.use('/', email)
 
-mongoose.connect(`mongodb+srv://bensonMooch:discojuice@cluster0-idibi.mongodb.net/test`, {useNewUrlParser: true, useFindAndModify: false});
+
+mongoose.connect('mongodb+srv://bensonMooch:discojuice@cluster0-idibi.mongodb.net/test', {useNewUrlParser: true, useFindAndModify: false} )
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 

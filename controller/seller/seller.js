@@ -52,7 +52,7 @@ module.exports = {
     const {newName, newDescription, newImg, newLink, newBusiness, id} = req.body
     if (!newName || !newDescription || !newImg || !newBusiness || !id) {
     return res.status(400).json({msg: `enter all feilds:  newName: ${newName}, newDescription: ${newDescription}, newImg: ${newImg}, newLink: ${newLink}, newBusiness ${newBusiness}, id: ${id}`})
-    }
+  }tom
     Seller.findByIdAndUpdate(id, { "$set": {name: newName, description: newDescription, img: newImg, link: newLink, business:newBusiness }}, function(err, seller){
 
      if(err) {

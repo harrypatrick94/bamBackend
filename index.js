@@ -7,6 +7,7 @@ const wine = require('./routes/wine/wine.js');
 const seller = require('./routes/seller/seller.js');
 const user = require('./routes/user/user.js');
 const email = require('./routes/email/email.js');
+const test = require('./routes/test/test.js')
 const creds = require('./creds.js')
 const PORT = 3000
 const app = express()
@@ -18,9 +19,8 @@ app.use('/wines', wine)
 app.use('/sellers', seller)
 app.use('/', user)
 app.use('/', email)
-app.use('/test' () => {
-  res.send('Hello world')
-})
+app.use('/', test)
+
 
 mongoose.connect(`mongodb+srv://${creds.mongodb}@cluster0-idibi.mongodb.net/test`, {useNewUrlParser: true, useFindAndModify: false} )
 const db = mongoose.connection;

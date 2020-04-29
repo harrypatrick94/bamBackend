@@ -6,7 +6,7 @@ module.exports = {
   deploy: {
     production: {
       user: 'ubuntu',
-      host: 'ec2-52-62-179-225.ap-southeast-2.compute.amazonaws.com',
+      host: 'ec2-13-210-197-204.ap-southeast-2.compute.amazonaws.com',
       key: '~/.ssh/bensonMooch.pem',
       ref: 'origin/master',
       repo: 'git@github.com:harrypatrick94/bamBackend.git',

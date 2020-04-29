@@ -10,7 +10,7 @@ module.exports = {
       key: '~/.ssh/bensonMooch.pem',
       ref: 'origin/master',
       repo: 'git@github.com:harrypatrick94/bamBackend.git',
-      path: '/home/ubuntu/bamBackend/bamBackend',
+      path: '/home/ubuntu/bamBackend',
       'post-deploy': 'npm install && pm2 startOrRestart ecosystem.config.js'
     }
   }

@@ -18,7 +18,9 @@ app.use('/wines', wine)
 app.use('/sellers', seller)
 app.use('/', user)
 app.use('/', email)
-
+app.use('/test' () => {
+  res.send('Hello world')
+})
 
 mongoose.connect(`mongodb+srv://${creds.mongodb}@cluster0-idibi.mongodb.net/test`, {useNewUrlParser: true, useFindAndModify: false} )
 const db = mongoose.connection;

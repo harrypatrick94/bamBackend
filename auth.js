@@ -13,7 +13,7 @@ function auth(req, res, next){
 
   try {
     // verify jsonwebtoken
-    const decoded = jwt.verify(token, "ra_myjwtSecret")
+    const decoded = jwt.verify(token, creds.jwtSecret)
     // add user from payload
 
     console.log( 'authed!' );
